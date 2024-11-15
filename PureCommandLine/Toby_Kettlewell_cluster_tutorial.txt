@@ -1,0 +1,194 @@
+# In this file, I describe how we can use the command line to interact with 
+#the Euclid servers. In particular, how we can use instructions in the command
+#line to interact with files and directories, and run code on the server in 
+#such a way that we can leave it to run without our attention.
+
+#To start with, we need to access a particular server
+ssh <login_name>@euclid-<number>.maths.gla.ac.uk
+
+# Whenever we are using a command line, we are "in" a particular 
+#directory (folder).
+# Whenever we give the name of a file, we can either give its absolute address,
+#fully describing its location, or we can give a relative address, which starts
+#from the current "working directory". We can Print the Working Directory with
+#the command:
+pwd
+# The root directory, the directory that is not itself contained in a directory,
+#has the address: /
+# We change our working directory with the command cd
+cd /
+pwd
+# The absolute location of any file can be described starting from the root
+#as the sequence of directories seperated by `/` and ending with the file name.
+# We can get the contents of a directory (by default the working directory)
+#with the command: ls [location]
+ls
+# On the cluster, you will have a home directory `/home/pgrad2/<login_name>/`.
+#This can also be written as ~
+ls ~
+# So, while in the root directory, we have printed the contents of our home 
+#directory, which we will now move to
+cd ~
+# For most commands, we can print the MANual, with the `man` command
+man ls
+# We can exit the manual by pressing the `q` key. One of the options we see is
+#using the parameter [-l] to print extra information
+ls -l
+
+#We'll make a test directory in which we will create some files.
+mkdir test_dir1
+cd test_dir1
+
+#Here, we'll make a file, and write some text to it.
+#The touch command is given a file name. If that file exists, it updates its
+#timestamp. Otherwise, it creates an empty file with that name:
+touch test_text.txt
+#Note, file extensions are usually matters of convention. It's best to be
+#consistent, but they don't strictly enforce anything.
+#The command `echo` prints text to the screen
+echo Lorem ipsum
+#We can write the output of commands to files using redirect, `>`.
+
+echo Lorem ipsum dolor sit amet > test_text.txt
+
+#We can read the contents of this file using a number of commands:
+cat test_text.txt
+head test_text.txt
+#Gives only the top of the file. More useful for very large files
+tail test_text.txt
+#Only prints the bottom
+less test_text.txt
+#Exit by pressing `q`
+
+#We will now look into moving and copying files.
+# We will use relative locations to do this. Starting with `..`, which is the 
+#directory above the current working directory.
+mkdir ../test_dir2
+#We can move the file over using `mv`
+mv test_text.txt ../test_dir2
+ls
+ls ../test_dir2
+#The working directory is now empty. Let's copy the file back
+
+cp ../test_dir2/test_text.txt ./test_text_copy.txt
+ls
+# Note, `.` is the current directory, and we have changed the name of the file
+#we've copied
+
+#Let's now get rid of the test files and directories we've created.
+#We'll use `rm` with the variable -r to remove the second test directory
+rm ../test_dir2
+#This didn't work. It wouldn't allow us because it's a directory
+#We can force it to delete the directory and its contents with:
+rm -r ../test_dir2
+# Be careful deleting non-empty directories. The command `rmdir` will delete
+#only empty directories
+rmdir ~/test_dir1/
+#For this test directory, we will remove the one file by itself:
+rm test_text_copy.txt
+#Then the directory
+rmdir ~/test_dir1/
+#To exit:
+exit
+
+
+#Having logged back in, we'll look at running R remotely
+mkdir ~/test_r_dir
+# Here, the distinction between running R interactively or in batch mode
+#becomes important.
+# In interactive mode, we can send instructions to R through the command line
+#as usual
+R
+getwd()
+# We can also use the function `interactive` to return a logic value stating
+#if we're in an interactive session or not
+interactive()
+#This can be useful if you want your code to run differently in batch mode
+
+# Note, this is not generally the same as the working directory we were using 
+#before.
+# We can install packages and load libraries as usual. It is worth being 
+#aware of which directory packages are loaded into and out of
+.libPaths()
+# As different Euclids have different versions of R, you may end up with 
+#different versions of the same libraries saved to different directories.
+# I've always managed to get by without manually setting my library path, but
+#.libPaths can be used to extend where the `library` function will look.
+# When using `install.packages`, you may want to dictate the library path in
+#advance. Additionally, you may wish to use the repos variable to choose from
+#where the package will be downloaded. This is particularly important for 
+#non-interactive, batch files, as you won't be able to manually select a 
+#repository.
+
+#When we want to leave, we use the function q
+q()
+#We may be asked if we want to save the workspace. I'd recommend against it.
+n
+
+#Often, we'll want to run an R file from the command line.
+#As before, we can use the `man` command to get information on R
+man R
+# Alternatively, we can use the arguments -h or --help. These are both 
+#available for many commands
+R -h
+
+#We can run a single expression in R using `-e`
+R -e "sqrt(16)"
+
+#We can run the file "test_r_file.R" using Rscript:
+Rscript test_r_file.R 400
+# Note that we were able the pass an argument in the command line. We are
+#making use of the `commandArgs` function in R. This returns a character vector
+#of arguments passed. It takes a parameter, "trailingOnly". If this is false,
+#the vector returned includes the filename and default arguments passed. 
+
+# I tend to run files using `R -f`, because I prefer its text output
+R -f test_r_file.R --args 400
+
+# Being able to run things on the cluster is more useful for slower tasks.
+R -f test_r_file_slow.R
+#Note the use of message functions to update the user on the programs's status
+#But, while this is running, we can't do anything else.
+#We can run this in the background by appending & onto the end:
+R -f test_r_file_slow.R &
+# We can now continue working while the job is in the background, except the
+#messages are still being written to the screen. We need to be able to redirect
+#the messages to their own file.
+# We saw this before with the symbol `>`. We need to account for there being
+#two outputs: stdout, the standard output, and stderr, the output for errors.
+# `>` redirects stdout, but if there are any errors while running the R code,
+#we want those to be forwarded to the same place. For this we use `&>`
+
+R -f test_r_file_slow.R --args 5 &> log.Rout &
+
+#Note that this gave us an ID for this job
+# We now need a way to keep track of which jobs are still running, for which we
+#can use the `jobs` command
+
+R -f test_r_file_slow.R --args 200 &> log.Rout &
+jobs -l
+#This also gives us the ID for all of the jobs still running
+# If we want to look at all jobs currently running in a cluster, whether ours
+#or someone else's, and the resource use of each job, we can use the command:
+top
+#Or, if we're just interested in our own jobs:
+top -u <login_name>
+
+# This is particularly useful because jobs only lists jobs that have been 
+#started in the current session. So, if you log out then later log in, you
+#won't be able to see any jobs kicked off earlier
+
+#We can kill this job using the ID
+kill <id>
+# If we logoff now, it will send a hang-up command to the jobs, killing them.
+#Obviously, we'd like to be able to walk away from the jobs without this. By 
+#adding nohup to the beginning, we can leave, and later return
+
+nohup R -f test_r_file_slow.R --args 200 &> log.Rout &
+
+# If we're planning to use a lot of computing resources, it's important that we
+#make sure we aren't monopolising the cluster. To ensure this, we use the 
+#`nice` command to ensure that jobs running in the background aren't 
+#prioritised.
+
+nohup nice R -f test_r_file_slow.R --args 200 &> log.Rout &

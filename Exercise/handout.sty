@@ -1,0 +1,180 @@
+% Style file for Ludger's handouts
+\ProvidesPackage{handout}
+
+% Load the required packages
+\RequirePackage{parskip}
+\RequirePackage{listings}
+\RequirePackage{geometry}
+\RequirePackage{pgf}
+\RequirePackage{times}
+\RequirePackage{amsfonts}
+\RequirePackage{amsmath}
+\RequirePackage{dsfont}
+\RequirePackage{xcolor}
+\RequirePackage{booktabs}
+\RequirePackage{enumerate}
+\RequirePackage{url}
+\RequirePackage{tikz}
+\RequirePackage[default, scale=0.95]{lato}
+\RequirePackage[sf,bf]{titlesec}
+
+\RequirePackage{tcolorbox}
+\definecolor{uogstone}{HTML}{7F7467}
+
+% Set page margins
+\geometry{a4paper,margin=1.5cm}
+
+% Create a new maketitle command
+\makeatletter
+\newcommand{\@course}{}
+\newcommand{\course}[1]{\renewcommand{\@course}{#1}}
+\renewcommand{\maketitle}{
+\begin{tikzpicture}[remember picture, overlay]
+\node [anchor=north west, shift={(14mm, -14mm)}]  at (current page.north west)
+{\includegraphics[width=4cm]{ga_logo.pdf}};
+\node [anchor=north east, shift={(-14mm, -14mm)}]  at (current page.north east)
+{\includegraphics[width=3cm]{Designer-29.jpeg}};
+\node [anchor=south west, text width=15cm, shift={(13.5mm, -44mm)}]  at (current page.north west)
+{\Huge\bf \vphantom{Xg}\@course\vphantom{Xg}};
+\end{tikzpicture}  
+
+\vspace{3.5cm}
+{\Huge\bf\color{uogblue}\@title}
+\par
+\bigskip
+}
+
+
+\newcounter{taskcount}
+\setcounter{taskcount}{1}
+\usepackage{ifthen}
+\newcommand{\tasktop}[1][]{
+\par\textbf{\sffamily Question \arabic{taskcount}}%
+\ifthenelse{ \equal{#1} {} }{\textbf{\sffamily. }}{ \textbf{\sffamily(#1). }}%
+\addtocounter{taskcount}{1}}
+\newcommand{\task}[1][]{\vspace{0.5cm}\tasktop[#1]}
+
+
+\newcounter{lstrnumber}
+\setcounter{lstrnumber}{1}
+\newcounter{lstsasnumber}
+\setcounter{lstsasnumber}{1}
+\newcounter{lstsqlnumber}
+\setcounter{lstsqlnumber}{1}
+
+
+\newcommand{\xb}{\ensuremath{\mathbf{x}}}
+\newcommand{\yb}{\ensuremath{\mathbf{y}}}
+\newcommand{\Yb}{\ensuremath{\mathbf{Y}}}
+\newcommand{\Hb}{\ensuremath{\mathbf{H}}}
+\newcommand{\Zb}{\ensuremath{\mathbf{Z}}}
+\newcommand{\Ab}{\ensuremath{\mathbf{A}}}
+\newcommand{\tb}{\ensuremath{\mathbf{t}}}
+\newcommand{\Lb}{\ensuremath{\mathbf{L}}}
+\newcommand{\Bb}{\ensuremath{\mathbf{B}}}
+\newcommand{\Cb}{\ensuremath{\mathbf{C}}}
+\newcommand{\Qb}{\ensuremath{\mathbf{Q}}}
+\newcommand{\Rb}{\ensuremath{\mathbf{R}}}
+\newcommand{\Eb}{\ensuremath{\mathbf{E}}}
+\newcommand{\Fb}{\ensuremath{\mathbf{F}}}
+\newcommand{\Tb}{\ensuremath{\mathbf{T}}}
+\newcommand{\Db}{\ensuremath{\mathbf{D}}}
+\newcommand{\Sb}{\ensuremath{\mathbf{S}}}
+\newcommand{\Ub}{\ensuremath{\mathbf{U}}}
+\newcommand{\Vb}{\ensuremath{\mathbf{V}}}
+\newcommand{\Xb}{\ensuremath{\mathbf{X}}}
+\newcommand{\Ib}{\ensuremath{\mathbf{I}}}
+\newcommand{\Kb}{\ensuremath{\mathbf{K}}}
+\newcommand{\kb}{\ensuremath{\mathbf{k}}}
+\newcommand{\wb}{\ensuremath{\mathbf{w}}}
+\newcommand{\zb}{\ensuremath{\mathbf{z}}}
+\newcommand{\vb}{\ensuremath{\mathbf{v}}}
+\newcommand{\ub}{\ensuremath{\mathbf{u}}}
+\newcommand{\bb}{\ensuremath{\mathbf{b}}}
+\newcommand{\cb}{\ensuremath{\mathbf{c}}}
+\newcommand{\db}{\ensuremath{\mathbf{d}}}
+\newcommand{\zerob}{\ensuremath{\boldsymbol 0}}
+\newcommand{\Sigmab}{\ensuremath{\boldsymbol\Sigma}}
+\newcommand{\Gammab}{\ensuremath{\boldsymbol\Gamma}}
+\newcommand{\Lambdab}{\ensuremath{\boldsymbol\Lambda}}
+\newcommand{\betab}{\ensuremath{\boldsymbol\beta}}
+\newcommand{\gammab}{\ensuremath{\boldsymbol\gamma}}
+\newcommand{\mub}{\ensuremath{\boldsymbol\mu}}
+\newcommand{\phib}{\ensuremath{\boldsymbol\phi}}
+\newcommand{\thetab}{\ensuremath{\boldsymbol\theta}}
+\newcommand{\epsilonb}{\ensuremath{\boldsymbol\varepsilon}}
+\newcommand{\alphab}{\ensuremath{\boldsymbol\alpha}}
+\newcommand{\oneb}{\ensuremath{\boldsymbol 1}}
+\newcommand{\ee}{\ensuremath{\mathds{E}}}
+\newcommand{\rr}{\ensuremath{\mathbb{R}}}
+\newcommand{\sgn}{\ensuremath{\mathrm{sign}}}
+\newcommand{\cov}{\ensuremath{\mathrm{cov}}}
+\newcommand{\var}{\ensuremath{\mathrm{Var}}}
+\newcommand{\varb}{\ensuremath{\mathbf{Var}}}
+
+\newcounter{continuousenumi}
+\setcounter{continuousenumi}{0}
+
+\newcommand{\textIT}[1]{\textrm{\textit{#1}}}
+\newcommand{\expr}[1]{\textIT{{expr}{#1}}}
+
+\newenvironment{qenum}{\noindent \par \vspace*{0.5cm}\par  {\color{uogthistle}\hrule} \nopagebreak
+\begin{enumerate}[\itshape\color{uogthistle} {Task} 1.]\setcounter{enumi}{\value{continuousenumi}}}{\setcounter{continuousenumi}{\value{enumi}}\end{enumerate}\nopagebreak\noindent {\color{uogthistle}\hrule} \par \vspace*{0.5cm}\par
+}
+\newcommand{\textTT}[1]{\textrm{\texttt{#1}}}
+
+\newcommand{\T}{^{\top}}
+
+
+\definecolor{uogblue}{HTML}{003865}
+\definecolor{uogsky}{HTML}{005398}
+\definecolor{uogcobalt}{HTML}{0075B0}
+\definecolor{uogturquoise}{HTML}{00B5D1}
+\definecolor{uogslate}{HTML}{4F5961}
+\definecolor{uogleaf}{HTML}{00843D}
+\definecolor{uogmoss}{HTML}{385A4F}
+\definecolor{uogsandstone}{HTML}{7A6855}
+\definecolor{uogmocha}{HTML}{AA8066}
+\definecolor{uogburgundy}{HTML}{7D2239}
+\definecolor{uogpillarbox}{HTML}{B30C00}
+\definecolor{uoglavender}{HTML}{5B4D94}
+\definecolor{uogthistle}{HTML}{951272}
+\definecolor{uogrose}{HTML}{B06C96}
+\definecolor{uogrust}{HTML}{BE4D00}
+\definecolor{uogpumpkin}{HTML}{FFB948}
+\definecolor{uogsunshine}{HTML}{FFDC36}
+\definecolor{uoggrey}{HTML}{545454}
+\colorlet{uogprimary}{uogblue}
+
+\RequirePackage{sectsty}{\allsectionsfont{\color{uogthistle}}}
+
+\newcounter{totmarks}
+\newcounter{totmarksMSc}
+\newcommand{\typesetmark}[1]{\mbox{}\linebreak[3]\mbox{} \hfill \mbox{\color{uogblue}\textsf{[#1]}}}
+\renewcommand{\marks}[1]{\typesetmark{#1 marks}\addtocounter{totmarks}{#1}}
+\renewcommand{\mark}[1]{\typesetmark{#1 mark}\addtocounter{totmarks}{#1}}
+\newcommand{\totalmarks}{\color{uogblue}\mbox{} \hfill \begin{tabular}{ll}\hline\hline\textsf{Total :} &\textsf{\arabic{totmarks}}
+\end{tabular}}
+
+
+\newcommand{\changeknitrcolours}{%
+\ifdef{\hlnum}{\renewcommand{\hlnum}[1]{\textcolor{black}{##1}}}{}%
+\ifdef{\hlstr}{\renewcommand{\hlstr}[1]{\textcolor{uogrust}{##1}}}{}%
+\ifdef{\hlcom}{\renewcommand{\hlcom}[1]{\textcolor{uogleaf}{\textit{##1}}}}{}%
+\ifdef{\hlopt}{\renewcommand{\hlopt}[1]{\textcolor{black}{##1}}}{}%
+\ifdef{\hlstd}{\renewcommand{\hlstd}[1]{\textcolor{black}{##1}}}{}%
+\ifdef{\hlkwa}{\renewcommand{\hlkwa}[1]{\textcolor{uogsky}{\textbf{##1}}}}{}%
+\ifdef{\hlkwb}{\renewcommand{\hlkwb}[1]{\textcolor{black}{##1}}}{}%
+\ifdef{\hlkwc}{\renewcommand{\hlkwc}[1]{\textcolor{uogthistle}{##1}}}{}%
+\ifdef{\hlkwd}{\renewcommand{\hlkwd}[1]{\textcolor{uogblue}{\textbf{##1}}}}{}%
+}
+
+
+\usepackage{tcolorbox}
+
+\tcbuselibrary{breakable}
+\newtcolorbox{answerBox}[1][]{colback=red!5!white,colframe=red!75!black,title=Answer,#1}
+
+
+
+
