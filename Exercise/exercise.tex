@@ -12,16 +12,22 @@
 \title{Exercise}
 \maketitle
 
-This is a standforward exercise to allow you to get first hand experience using the servers, If you would rather replace the script here with a different script or a different task this is completely fine. We are simply trying to give you an opportunity to ask questions aboutt he use of the server.
+This is a standforward exercise to allow you to get first hand experience using servers, 
+
+If you would rather replace the script here with a different script or a
+different task this is completely fine. We are simply trying to give you an
+opportunity to ask questions aboutt he use of the server.
 
 
 \section*{Task}
 
-Please run the Python/R (choose your language) script on one of the servers.
+Please run the Python/R (choose your language) script on a servers.
+If you have access to the servers then the school please use them if you dont
+we will try to provide an alternative server which you can use. 
+
 You can run this in any of the ways that we have demonstrated to you in this
 session. If you get stuck feel free to ask questions of the PhD students and
 staff in the room. 
-
 
 The exercise has been designed so that you need to:
 
@@ -34,24 +40,81 @@ The exercise has been designed so that you need to:
  
 The code to run can be found in this directory (with a little help with ChatGPT). 
 
-Your workflow should be as follows:
+Your workflow is slightly different for using one of our servers and the other example server: 
+
+\paragraph{Schools Server}
 
 \begin{enumerate}
   \item Connect to the VPN to gain access to the internal network
-  \item Transfer the files to the server using scp from the commandline or a GUI application e.g.filevila or winscp.
   \item Select a Euclid to run the code on.
-  \item Setup a basic R/Python environment to run the code 
+  \item Git clone this repo. 
   \item Run the code using one of the methods shown by our PhD students
-  \item Transfer the results from the server back to your laptop. 
+  \item Transfer the results back to your system using scp from the commandline or a GUI application e.g.filevila or winscp.
 \end{enumerate}
 
 Do not worry if you cannot finish this during the session, but if you think you
 will need to use the server, please try in your time, and ask either one of the
 PhD student who presented or me for help in running things. 
 
+
+\paragraph{External Server}
+
+
+\begin{enumerate}
+  \item Ssh into the external server
+  \item Git clone this repo  
+  \item Run the code using one of the methods shown by our PhD students
+  \item Transfer the results from the server back to your laptop. 
+\end{enumerate}
+
+Note, this server will only exist during the server session and will disappear
+after this to complete this after the  session please gain Euclid access and complete using the euclid servers. 
+
+
 \subsection*{Python Users}
 
-For those wishing to use Python rather than R, if you are doing this live in the session it might be easier to use the system Python (just to avoid setup times for anaconda. However in general we would recommend using an anaconda installation. 
+For those wishing to use Python rather than R, if you are doing this live in
+the session it might be easier to use the system Python (just to avoid setup
+times for anaconda. However in general we would recommend using an anaconda
+installation. 
+
+\section{Tasks}
+
+\subsection{Task 1}
+
+This task does not require any libraries and therefore should be able to be ran on any system which has python/R. 
+The files that you need to run are called:
+
+\begin{itemize}
+  \item Task1.py - python version of this file
+  \item Task1.R  - R version of this file
+\end{itemize}
+
+These scripts will make a simple output file called \texttt{results.csv} which you should transfer back to your system. 
+
+
+\subsection{Task 2}
+
+This task requires an environment that has a number of packages, and on the Euclids you may have to install and set up and environment.  
+
+\begin{itemize}
+  \item Task2.py - python version of this file
+  \item Task2.R  - R version of this file
+\end{itemize}
+
+These scripts will fit a logistic regression on the iris dataset, and then make some plots. 
+
+This is a simple script which was made with some Chat help, but it has issues:
+
+\begin{itemize}
+  \item Preprocessing (Scaling/PCA) is performed before the training test split, \textbf{Big NO NO}
+  \item To simulate out of sample should fit on train and then test on test.
+\end{itemize}
+
+So please dont use this implementation for anything else! 
+
+This will make some images, which will allow you to test moving images and more complex output from the servers.
+
 
 \end{document}
 
