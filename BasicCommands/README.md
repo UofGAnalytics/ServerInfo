@@ -47,4 +47,5 @@ If you use WSL, you will need to do this separately for both Windows and WSL, or
 ## Create SSH Aliases
 To prevent you having to type out `<login_name>@euclid-<number>.maths.gla.ac.uk` every time, aliases for servers can be added to your SSH config file, usually located at `~/.ssh/config`.
 
-For Unix/WSL/MacOS, these aliases can be added to your SSH config file using the script located at `tools/create-euclid-aliases.sh`. For Windows
+Instructions can be found in [tools/README](tools/README.md).
+

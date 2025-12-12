@@ -10,7 +10,7 @@ The overall structure is as follow:
 2. RServer&CommandlineScreen - A guide to using RServer and the Commandline
 3. PureCommandLine - A guide to using pure commandline
 4. Slurm - A guide to using our job scheduler.
-5. Tools - Tools that may be useful for working with Euclids.
+5. Tools - Contains script for adding SSH aliases for Euclid servers.
 6. BasicCommands - A collection of simple commands for connecting to the servers.
 
 ## Command line use.
