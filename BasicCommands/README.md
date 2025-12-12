@@ -12,6 +12,7 @@ Be careful not to leave large files on the Euclid machines indefinitely. To see 
 ## Run program in background
 To run a program in the background, so it doesn't close when your terminal session closes, there are two main options:
 1. Prefix your command with `nohup` (short for "no hangup") to prevent closing the terminal from stopping the program, and place an `&` after your command to be able to be able to continue using the same command prompt.
+- Example usage: `nohup python my_python_script.py arg1 arg2 &`.
 - Command output will be appended to the `nohup.out` file in real time.
 - You can view live command output using `tail -f nohup.out`.
 - Running programs can be killed using `killall command_name --user your_username`. You can check the command name using `top`.
@@ -24,6 +25,12 @@ To run a program in the background, so it doesn't close when your terminal sessi
 
 ## Disconnect from a Euclid machine:
 `logout`
+
+## Run at lower priority:
+To run at a lower priority (such as a task on an already busy machine), prefix your command with `nice -n <level>`, e.g., `nice -n 19 mycommand`. Nice level ranges from -20 (least nice, highest priority) to 19 (lowest priority), and often defaults to 0.
+
+## Run on certain cores only:
+You may want to limit the number of cores your process runs on. To do this, you can specify the IDs of the cores you wish to use by prefixing your command with `taskset -c <list of core ids>`, e.g., `taskset -c 0,1,2,3 mycommand` to run `mycommand` on cores 0-3 only.
 
 # Misc & Tools
 ## Use SSH Keys to skip password prompt
