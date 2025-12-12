@@ -1,0 +1,108 @@
+Host slurmctl
+	HostName slurmctl.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-01
+	HostName euclid-01.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-02
+	HostName euclid-02.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-03
+	HostName euclid-03.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-04
+	HostName euclid-04.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-05
+	HostName euclid-05.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-06
+	HostName euclid-06.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-07
+	HostName euclid-07.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-08
+	HostName euclid-08.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-09
+	HostName euclid-09.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-10
+	HostName euclid-10.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-12
+	HostName euclid-12.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-13
+	HostName euclid-13.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-14
+	HostName euclid-14.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-15
+	HostName euclid-15.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-16
+	HostName euclid-16.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-17
+	HostName euclid-17.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-18
+	HostName euclid-18.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-19
+	HostName euclid-19.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-20
+	HostName euclid-20.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-21
+	HostName euclid-21.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-22
+	HostName euclid-22.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-23
+	HostName euclid-23.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-24
+	HostName euclid-24.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-25
+	HostName euclid-25.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-26
+	HostName euclid-26.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-27
+	HostName euclid-27.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-28
+	HostName euclid-28.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-29
+	HostName euclid-29.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-30
+	HostName euclid-30.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-31
+	HostName euclid-31.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-32
+	HostName euclid-32.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-33
+	HostName euclid-33.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-35
+	HostName euclid-35.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-36
+	HostName euclid-36.maths.gla.ac.uk
+	User <euclid_username>
+Host euclid-37
+	HostName euclid-37.maths.gla.ac.uk
+	User <euclid_username>
