@@ -1,4 +1,5 @@
 #!/bin/bash
+# Uses "command" to check whether a command exists on each of the Euclids.
 
 UNRESTRICTED_SERVERS="01 02 04 05 10 18 19 21 23 25 26 27 28 29 30"
 RESTRICTED_SERVERS="03 06 07 08 09 12 17 22 24 32 35 36 37 "
@@ -8,6 +9,12 @@ RETIRED_SERVERS="11 34"
 SERVERS=$UNRESTRICTED_SERVERS
 
 cmdToCheck=$1
+
+if [[ -z $cmdToCheck ]]; then
+	echo "No command to check installation status specified, exiting."
+	echo "Usage: ./check_installed.sh <command to check>"
+	exit
+fi
 
 while true; do
     read -p "Check whether command '$cmdToCheck' exists on the euclid servers? Y/n " yn
