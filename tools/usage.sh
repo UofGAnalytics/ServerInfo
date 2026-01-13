@@ -1,4 +1,6 @@
 #!/bin/bash
+# Student-written helper script to check the live CPU/Memory/GPU utilisation of the Euclid servers.
+# Use at own risk, and always be careful not to cause any disruption to other users or access machines which you do not have permission to use.
 
 UNRESTRICTED_SERVERS="01 02 04 05 10 18 19 21 23 25 26 27 28 29 30"
 RESTRICTED_SERVERS="03 06 07 08 09 12 17 22 24 32 35 36 37 "

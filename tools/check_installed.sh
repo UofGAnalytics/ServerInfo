@@ -1,5 +1,6 @@
 #!/bin/bash
-# Uses "command" to check whether a command exists on each of the Euclids.
+# Student-written helper script which uses "command" to check whether a command exists on each of the Euclids.
+# Use at own risk, and always be careful not to cause any disruption to other users or access machines which you do not have permission to use.
 
 UNRESTRICTED_SERVERS="01 02 04 05 10 18 19 21 23 25 26 27 28 29 30"
 RESTRICTED_SERVERS="03 06 07 08 09 12 17 22 24 32 35 36 37 "
