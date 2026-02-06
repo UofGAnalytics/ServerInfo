@@ -1,4 +1,5 @@
 #!/bin/bash
+# Usage: usage.sh [euclid ids to check usage of]
 # Student-written helper script to check the live CPU/Memory/GPU utilisation of the Euclid servers.
 # Use at own risk, and always be careful not to cause any disruption to other users or access machines which you do not have permission to use.
 
@@ -8,6 +9,10 @@ SLURM_SERVERS="13 14 15 16 20 31 33"
 RETIRED_SERVERS="11 34"
 
 SERVERS=$UNRESTRICTED_SERVERS
+
+if [[ $# > 0 ]]; then
+	SERVERS="$@"
+fi
 
 # Run command & save output to temp directory
 tmpdir=$(mktemp -d)
