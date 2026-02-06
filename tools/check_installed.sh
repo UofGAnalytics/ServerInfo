@@ -1,6 +1,7 @@
 #!/bin/bash
 # Student-written helper script which uses "command" to check whether a command exists on each of the Euclids.
 # Use at own risk, and always be careful not to cause any disruption to other users or access machines which you do not have permission to use.
+# Specify --pip to check Python libraries instead of installed applications.
 
 UNRESTRICTED_SERVERS="01 02 04 05 10 18 19 21 23 25 26 27 28 29 30"
 RESTRICTED_SERVERS="03 06 07 08 09 12 17 22 24 32 35 36 37 "
@@ -10,6 +11,11 @@ RETIRED_SERVERS="11 34"
 SERVERS=$UNRESTRICTED_SERVERS
 
 cmdToCheck=$1
+
+function cleanup {
+	echo ""
+}
+trap cleanup EXIT
 
 if [[ -z $cmdToCheck ]]; then
 	echo "No command to check installation status specified, exiting."
@@ -28,7 +34,11 @@ done
 
 # Run command & save output to temp directory
 tmpdir=$(mktemp -d)
-cmd="command -v $cmdToCheck" # Command to run on each euclid
+if [[ $* == *--pip* ]]; then
+	cmd="pip list | grep '$cmdToCheck '"
+else
+	cmd="command -v $cmdToCheck" # Command to run on each euclid
+fi
 for euclid in $SERVERS; do
 	echo $(if out=$(ssh "euclid-$euclid" -q -o RemoteCommand="$cmd" 2>&1); then
 		echo "$out"
