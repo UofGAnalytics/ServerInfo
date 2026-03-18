@@ -29,6 +29,7 @@ done
 n_servers=$(echo $SERVERS | wc --words)
 echo "Total CPU Usage; Total Mem Usage; Physical(Logical) Cores; Total Mem; GPU Utilisation per GPU"
 while :; do
+	read -p letter &
 	done_count=0
 	for euclid in $SERVERS; do
 		if [[ -s "$tmpdir/euclid-$euclid-cpu-mem" && -s "$tmpdir/euclid-$euclid-lscpu" && -s "$tmpdir/euclid-$euclid-gpu" ]]; then
@@ -48,6 +49,12 @@ while :; do
 	
 	# Break if all servers have responded
 	((done_count == n_servers)) && break
+	
+	# Detect escape keypress	
+	read -t 0.01 -N 1 input
+    	if [[ $input = "q" ]] || [[ $input = "Q" ]]; then
+		break
+	fi
 	
 	# Move cursor back to top
 	printf "\033[${n_servers}A"
