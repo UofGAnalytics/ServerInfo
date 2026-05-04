@@ -61,6 +61,12 @@ while :; do
 		fi
 	done
 	
+	# Break if escape keypress
+	read -t 0.01 -N 1 input
+        if [[ $input = "q" ]] || [[ $input = "Q" ]]; then
+                break
+        fi
+
 	# Break if all servers have responded
 	((done_count == n_servers)) && break
 	
